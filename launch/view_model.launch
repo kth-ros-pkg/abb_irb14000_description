@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="name" default="yumi" doc="The robot name. Ensure this is the same name you give to the arm in the urdf instance."/>
+
+  <arg name="arms_hardware_interface" default="VelocityJointInterface"/>
+  <arg name="grippers_hardware_interface" default="EffortJointInterface"/>
+  <param name="robot_description" 
+         command="$(find xacro)/xacro --inorder '$(find abb_irb14000_description)/urdf/abb_irb14000.urdf.xacro' arms_interface:=$(arg arms_hardware_interface) grippers_interface:=$(arg grippers_hardware_interface)" />
+
+  <node name="model_joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  <node name="model_robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" /> 
+
+  <param name="use_gui" value="true" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find abb_irb14000_description)/launch/view_model.rviz" />
+
+</launch>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="arms_hardware_interface" default="VelocityJointInterface"/>
+  <arg name="grippers_hardware_interface" default="EffortJointInterface"/>
+  
+  <param name="robot_description" 
+         command="$(find xacro)/xacro --inorder '$(find abb_irb14000_description)/urdf/abb_irb14000.urdf.xacro' arms_interface:=$(arg arms_hardware_interface) grippers_interface:=$(arg grippers_hardware_interface) -o $(find abb_irb14000_description)/urdf/abb_irb14000.urdf" />
+
+</launch>
